@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router";
-import Home from "../pages/Home";
-import Artists from "../pages/Artists";
-import Album from "../pages/Album";
+import Home from "../../pages/Home";
+import Artists from "../../pages/Artists";
+import Album from "../../pages/Album";
 
 const Main = () => {
     return (

@@ -1,7 +1,7 @@
-import Main from "./layout/Main";
-import Header from "./layout/Header";
-import LeftSideBar from "./layout/LeftSideBar";
-import MusicPlayer from "./layout/MusicPlayer";
+import Main from "./components/layout/Main";
+import Header from "./components/layout/Header";
+import LeftSideBar from "./components/layout/LeftSideBar";
+import MusicPlayer from "./components/layout/MusicPlayer";
 
 const App = () => {
   
