@@ -1,4 +1,4 @@
-import { UserIcon, SearchIcon } from 'lucide-react';
+import { UserIcon } from 'lucide-react';
 import SearchBar from '../ui/SearchBar';
 
 const Header = () => {
