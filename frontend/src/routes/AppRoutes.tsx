@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router";
+import MainLayout from "../layout/MainLayout";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route />
+      <Route path="/" element={<MainLayout />} />
     </Routes>
   )
 };
