@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 
 interface InputSong {
-    value: String
+    value: string
 }
 
 const initialState: InputSong = {
@@ -14,7 +14,7 @@ const songSlice = createSlice({
     name: "song",
     initialState,
     reducers: {
-        fetchSong: (state, action: PayloadAction<String>) => {
+        fetchSong: (state, action: PayloadAction<string>) => {
             state.value = action.payload;
         },
     },
