@@ -39,7 +39,7 @@ const SearchResults = () => {
           <img 
             src={item.image[1]?.url || item.image[0]?.url} 
             alt={item.name} 
-            className="w-12 h-12 mr-3 rounded object-cover flex-shrink-0" 
+            className="w-12 h-12 mr-3 rounded object-cover shrink-0"
           />
           <div className="flex flex-col overflow-hidden text-black">
             <span 

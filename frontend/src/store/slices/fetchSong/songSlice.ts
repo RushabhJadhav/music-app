@@ -5,8 +5,6 @@ import axiosInstance from "../../../lib/axios";
 export const fetchSearchResults = createAsyncThunk(
     "song/fetchSearchResults",
     async (query: string) => {
-        // We'll fetch songs first, and potentially combine with albums if the API supports it.
-        // For now, based on the provided JSON, it's under data.results
         const response = await axiosInstance.get(`/search/songs?query=${query}`);
         return response.data.data.results;
     }
