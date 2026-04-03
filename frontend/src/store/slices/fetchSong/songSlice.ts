@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import axiosInstance from "../../../lib/axios";
 
-export const fetchSongs = createAsyncThunk(
-    "song/fetchSongs",
+export const fetchSearchResults = createAsyncThunk(
+    "song/fetchSearchResults",
     async (query: string) => {
+        // We'll fetch songs first, and potentially combine with albums if the API supports it.
+        // For now, based on the provided JSON, it's under data.results
         const response = await axiosInstance.get(`/search/songs?query=${query}`);
         return response.data.data.results;
     }
@@ -30,25 +32,29 @@ const songSlice = createSlice({
     reducers: {
         setQuery: (state, action) => {
             state.query = action.payload;
+        },
+        clearResults: (state) => {
+            state.results = [];
+            state.status = 'idle';
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSongs.pending, (state) => {
+            .addCase(fetchSearchResults.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchSongs.fulfilled, (state, action) => {
+            .addCase(fetchSearchResults.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.results = action.payload;
             })
-            .addCase(fetchSongs.rejected, (state, action) => {
+            .addCase(fetchSearchResults.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message || 'Failed to fetch songs';
+                state.error = action.error.message || 'Failed to fetch results';
             });
     },
 });
 
-export const { setQuery } = songSlice.actions;
+export const { setQuery, clearResults } = songSlice.actions;
 
 export const selectSearchQuery = (state: RootState) => state.song.query;
 export const selectSearchResults = (state: RootState) => state.song.results;
