@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
-import axios from "axios";
+import axiosInstance from "../../../lib/axios";
 
 export const fetchSongs = createAsyncThunk(
     "song/fetchSongs",
     async (query: string) => {
-        const response = await axios.get(`https://saavn.sumit.co/api/search/songs?query=${query}`);
+        const response = await axiosInstance.get(`/search/songs?query=${query}`);
         return response.data.data.results;
     }
 );
