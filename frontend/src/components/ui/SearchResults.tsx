@@ -1,11 +1,14 @@
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { selectSearchResults, selectSearchStatus } from "../../store/slices/fetchSong/songSlice";
+import { setTrack } from "../../store/slices/musicPlayer/musicPlayerSlice";
 
 const SearchResults = () => {
   const results = useAppSelector(selectSearchResults);
   const status = useAppSelector(selectSearchStatus);
+  const dispatch = useAppDispatch();
 
   if (status === 'loading') {
+// ... (rest of loading state)
     return (
       <div className="absolute border-2 w-full mt-1 rounded-sm bg-white z-50 p-4 text-center">
         Loading...
@@ -35,6 +38,7 @@ const SearchResults = () => {
         <div 
           key={item.id} 
           className="p-2 flex items-center hover:bg-gray-100 cursor-pointer border-b last:border-b-0"
+          onClick={() => dispatch(setTrack({ track: item, queue: results }))}
         >
           <img 
             src={item.image[1]?.url || item.image[0]?.url} 
