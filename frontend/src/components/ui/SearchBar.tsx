@@ -1,5 +1,5 @@
 import { SearchIcon } from "lucide-react";
-import { fetchSearchResults, setQuery, clearResults } from "../../store/slices/fetchSong/songSlice";
+import { fetchSearchResults, setQuery, clearResults, setShowResults } from "../../store/slices/fetchSong/songSlice";
 import { type ChangeEvent, useState, useEffect } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { useDebounce } from "../../hooks/useDebounce";
@@ -13,9 +13,11 @@ const SearchBar = () => {
     if (debouncedSearchTerm) {
       dispatch(fetchSearchResults(debouncedSearchTerm));
       dispatch(setQuery(debouncedSearchTerm));
+      dispatch(setShowResults(true));
     } else {
       dispatch(clearResults());
       dispatch(setQuery(""));
+      dispatch(setShowResults(false));
     }
   }, [debouncedSearchTerm, dispatch]);
 
@@ -32,6 +34,7 @@ const SearchBar = () => {
         placeholder="Search songs"
         value={searchTerm}
         onChange={handleSearch}
+        onFocus={() => searchTerm && dispatch(setShowResults(true))}
       />
     </div>
   )
